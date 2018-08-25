@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>vip</title>
+</head>
+
+<body>
+    <div id="myApp">
+        <!-- 显示视窗 -->
+        <iframe id="videos" src="" frameborder="0" :width="width" :height="height"></iframe>
+        <div class="action">
+            <ul>
+                <li>收藏</li>
+                <li>分享</li>
+                <li>缓存</li>
+                <li>全屏</li>
+                <li class="apiList">
+                    <span @click.stop="toggleList">线路{{ getNowApiName }}</span>
+                </li>
+            </ul>
+        </div>
+        <div class="title">
+            <p>剧集</p>
+        </div>
+        <ol>
+            <!-- item表示json数据的 每一个成员 -->
+            <li v-for="(item,index) in data" @click="selectUrl(item)">{{index+1}}</li>
+        </ol>
+        <div class="box">
+            <div>
+                <span @click="close">X</span>
+            </div>
+            <!-- 显示隐藏 -->
+            <ul v-if="isShow" class="box_xl">
+                <!-- 动态创建列表 -->
+                <li v-for="(item,index) in api" @click="selectApi(index)">线路{{ index+1 }}</li>
+            </ul>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/3.3.1/jquery.min.js"></script>
+    <script src="url.json"></script>
+    <script src="videoApi.json"></script>
+    <script>
+        var myApp = new Vue({
+            el: "#myApp",
+            data: {
+                data: data,
+                videoSrc: 'https://v.qq.com/x/cover/33bfp8mmgakf0gi.html',    //动态传入url参数
+                api: api,        //导入接口数据
+                nowIndex: 0,     //默认接口下标为0
+                isShow: false,     //列表是否显示
+                width: "",          //视窗宽度
+                height: "",          //视窗高度
+            },
+            methods: {
+                selectUrl: function (item) {
+                    this.videoSrc = item;
+                    console.log(this.videoSrc);
+                },
+                close:function(){
+                    $(".box").css('display', 'none');
+                },
+                //方法
+                //下拉列表
+
+                toggleList: function () {
+                    //不显示
+                    if (this.isShow == false) {
+                        $(".box").css('display', 'block');
+                        //让其显示
+                        this.isShow = true;
+                    } else {
+                        //不显示
+                        $(".box").css('display', 'none');
+                        this.isShow = false;
+                    }
+                },//选中接口
+                selectApi: function (index) {
+                    this.nowIndex = index;          //获取每一个接口对应的下标
+                    this.toggleList();              //去调用该方法
+                },
+            },
+            computed: {
+                getNowApiName: function () {
+                    //获取对应接口的下标
+                    return this.nowIndex + 1;
+                },
+                getApi: function () {
+                    //获取下标对应接口 ——>链接url
+                    return this.api[this.nowIndex] + this.videoSrc;
+                }
+            },
+            watch: {
+                videoSrc: function () {
+                    //获取播放数据通过调用getApi()这个方法
+                    document.getElementById("videos").src = this.getApi;
+                },
+                nowIndex: function () {
+                    //获取json接口通过调用getApi()这个方法
+                    document.getElementById("videos").src = this.getApi;
+                }
+            },
+            mounted: function () {
+                let that = this;
+                // 点击空白区域，列表消失
+                document.documentElement.addEventListener("click", function () {
+                    that.isShow = false;
+                })
+                // 计算屏幕长宽
+                this.width = $("#videos").width() + "px";//可以给固定宽高
+                this.height = $("#videos").height() + "px";
+                // 打开默认播放默认视频
+                document.getElementById("videos").src = this.getApi;
+            }
+        })
+
+    </script>
+</body>
+
+</html>

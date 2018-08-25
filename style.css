@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+#myApp {
+    width: 360px;
+    height: 640px;
+    border: 1px solid #eee;
+    margin: 10px 35%;
+    position: relative;
+}
+
+#videos {
+    width: 100%;
+    height: 420px;
+    background: #000;
+}
+
+.action {
+    width: 100%;
+    height: 80px;
+    line-height: 80px;
+    background: #FF8C69;
+    padding-top: 10px;
+}
+
+.action ul {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    padding-top: 10px;
+}
+
+.action li {
+    float: left;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    margin: 0 12px 0 12px;
+    background: skyblue;
+    border-radius: 5px;
+    line-height: 48px;
+    text-align: center;
+}
+
+.title {
+    width: 100%;
+    height: 36px;
+    padding-top: 17px;
+}
+
+.title p {
+    padding-left: 8px;
+    font-size: 16px;
+    border-left: 2px solid #71C671;
+}
+
+ol {
+    width: 100%;
+    height: 45px;
+    overflow: hidden;
+}
+
+ol>li {
+    margin: 2px;
+    float: left;
+    width: 41px;
+    height: 41px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 2px;
+    background: #eee;
+    cursor: pointer;
+}
+
+.box {
+    width: 360px;
+    height: 280px;
+    background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    bottom:0;
+    left: 0;
+    display: none;
+    /*默认隐藏*/
+}
+
+.box div {
+    width: 60px;
+    height: 59px;
+    border-left: 1px solid #fff;
+    position: relative;
+    left: 180px;
+}
+
+.box div span {
+    display: inline-block;
+    line-height: 20px;
+    text-align: center;
+    position: relative;
+    top: -2px;
+    left: -10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    color: skyblue;
+    background: #fff;
+    cursor: pointer;
+}
+
+.box_xl {
+    position: relative;
+    left: 82px;
+    top: 12px;
+    width: 195px;
+    height: 195px;
+}
+
+.box_xl li {
+    float: left;
+    text-align: center;
+    line-height: 55px;
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    font-size: 13px;
+    background: yellow;
+    border-radius: 50%;
+    margin: 5px;
+    box-shadow: 1px 1px 1px #666;
+}
